@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoboStore Python Lists Lab</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;color:#222}
+header{background:#0f4c81;color:white;padding:20px;text-align:center}
+.container{max-width:1000px;margin:auto;padding:20px}
+.card{background:white;padding:20px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.1);margin-bottom:20px}
+button{background:#0f4c81;color:white;border:none;padding:10px 15px;border-radius:6px;cursor:pointer}
+input{padding:8px;width:220px}
+.code{background:#1e1e1e;color:#9cdcfe;padding:10px;border-radius:8px;font-family:monospace}
+.badge{display:inline-block;background:#28a745;color:white;padding:6px 10px;border-radius:20px;margin:5px}
+#inventoryView span{display:inline-block;background:#e9f2ff;padding:10px 15px;margin:5px;border-radius:8px;border:1px solid #a8c6f0}
+.progress{height:22px;background:#ddd;border-radius:20px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:#28a745;color:white;text-align:center}
+</style>
+</head>
+<body>
+<header>
+<h1>🤖 RoboStore: Python Lists Lab</h1>
+<p>NC(V) Level 2 Robotics & Python</p>
+</header>
+<div class="container">
+
+<div class="card">
+<h2>Mission Progress</h2>
+<div class="progress"><div class="progress-bar" id="progressBar">0%</div></div>
+</div>
+
+<div class="card">
+<h2>Robot Inventory Simulator</h2>
+<p>Current Python List:</p>
+<div id="inventoryView"></div>
+<p><strong>Inventory Variable:</strong></p>
+<div class="code" id="listDisplay"></div>
+<br>
+<input id="itemInput" placeholder="Enter item">
+<button onclick="addItem()">append()</button>
+<button onclick="removeItem()">remove()</button>
+<button onclick="sortItems()">sort()</button>
+<button onclick="reverseItems()">reverse()</button>
+</div>
+
+<div class="card">
+<h2>Mission 1: Indexing</h2>
+<p>What is printed by <code>inventory[0]</code>?</p>
+<button onclick="checkMission(1)">Battery</button>
+<button>Sensor</button>
+<button>Motor</button>
+</div>
+
+<div class="card">
+<h2>Mission 2: Count Items</h2>
+<p>How many items are currently in the starting inventory?</p>
+<button onclick="checkMission(2)">3</button>
+<button>2</button>
+<button>4</button>
+</div>
+
+<div class="card">
+<h2>Mission 3: Add a Camera</h2>
+<p>Use the simulator above to add <strong>Camera</strong>.</p>
+<button onclick="validateCamera()">Check Mission</button>
+</div>
+
+<div class="card">
+<h2>Badges Earned</h2>
+<div id="badges"></div>
+</div>
+
+<div class="card">
+<h2>Exit Ticket</h2>
+<ol>
+<li>Which method adds an item? <strong>append()</strong></li>
+<li>Which method removes an item? <strong>remove()</strong></li>
+<li>Which function counts items? <strong>len()</strong></li>
+<li>What is the first index? <strong>0</strong></li>
+<li>Which method sorts a list? <strong>sort()</strong></li>
+</ol>
+</div>
+
+</div>
+<script>
+let inventory=['Battery','Sensor','Motor'];
+let score=0;
+function render(){
+ document.getElementById('listDisplay').textContent='inventory = '+JSON.stringify(inventory);
+ document.getElementById('inventoryView').innerHTML=inventory.map(x=>'<span>'+x+'</span>').join('');
+}
+function addItem(){
+ let item=document.getElementById('itemInput').value.trim();
+ if(item){inventory.push(item);render();}
+}
+function removeItem(){
+ let item=document.getElementById('itemInput').value.trim();
+ let i=inventory.indexOf(item);
+ if(i>-1){inventory.splice(i,1);render();}
+}
+function sortItems(){inventory.sort();render();}
+function reverseItems(){inventory.reverse();render();}
+function award(name){
+ document.getElementById('badges').innerHTML += '<span class="badge">'+name+'</span>';
+}
+function updateProgress(){
+ let pct=Math.min(100,(score/3)*100);
+ let bar=document.getElementById('progressBar');
+ bar.style.width=pct+'%';
+ bar.textContent=Math.round(pct)+'%';
+}
+function checkMission(m){
+ score++;
+ award('Mission '+m+' Complete');
+ updateProgress();
+}
+function validateCamera(){
+ if(inventory.includes('Camera')){
+ score++;
+ award('Camera Technician');
+ updateProgress();
+ alert('Well done! Mission completed.');
+ } else {
+ alert('Add Camera using append() first.');
+ }
+}
+render();
+</script>
+</body>
+</html>
