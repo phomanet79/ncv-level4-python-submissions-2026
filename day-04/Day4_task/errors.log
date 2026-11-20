@@ -1,0 +1,12 @@
+WATER BILLING ERROR LOG
+============================================================
+Line 211 [M001,Duplicate Meter,900,930,Mamelodi] -> Rejected: Duplicate meter number (M001).
+Line 212 [M211,Missing Reading,,950,Soshanguve] -> Rejected: One or more empty fields.
+Line 213 [M212,Negative Reading,-10,20,Mamelodi] -> Rejected: Negative meter reading.
+Line 214 [M213,Reversed Reading,1200,1100,Ga-Rankuwa] -> Rejected: Current reading is below previous reading.
+Line 215 [M214,Invalid Reading,abc,1230,Atteridgeville] -> Rejected: Non-numeric meter reading.
+Line 216 [M215,Missing Area,900,950,] -> Rejected: One or more empty fields.
+Line 217 [M216,Too,Few,Fields] -> Rejected: Missing or extra fields.
+Line 218 [M217,Extra,100,120,Mamelodi,EXTRA] -> Rejected: Missing or extra fields.
+Line 219 [M218,,100,150,Soshanguve] -> Rejected: One or more empty fields.
+Line 220 [M219, ,100,130,Mamelodi] -> Rejected: One or more empty fields.
